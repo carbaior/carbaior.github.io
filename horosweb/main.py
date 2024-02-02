@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import gzip, asyncio, js
+import gzip, asyncio
 from pyscript import document
 from pyweb import pydom
 
@@ -91,35 +91,6 @@ def ang(a,b):
 		res=3600-res
 	return res
 	
-"""
-def relpos(a,b):
-	if a > b and a-b <= 180:
-		res=-1
-	elif a > b and a-b >= 180:
-		res=1
-	elif b > a and b-a >= 180:
-		res=-1
-	else:
-		res=1
-def restagrados_s(a,b):
-	s=1 
-	if a<b:
-		a+=3600
-		s=-1
-	return (a-b)*s
-	
-"""
-
-"""	
-def restagrados(a,b):
-	if a<b:
-		a+=3600
-	return (a-b)
-"""
-
-
-
-
 def imprimir(reg):
 	cadena=""
 	cadena+="\nPLANETS FIT THE HOROSCOPE AT JD:"+str(reg[0])+"\n"
@@ -156,10 +127,6 @@ def limpiar(event):
 	dwnldButton.setAttribute("disabled","true")
 	infile.close()
 
-
-#planetpos.dat.gz, 16696885 bytes, md5sum: c4765acd93309d611b8061256e202d3f
-#FORMAT:
-#JD SUN MOON SATURN JUPITER MARS VENUS MERCURY YEAR MONTH DAY
 
 async def horosweb(event):
 	runButton=document.getElementById("run")
@@ -252,26 +219,18 @@ async def horosweb(event):
 	cadena+='\t{:.1f}'.format(fin(6)/10)+"\n"
 	cadena+="================================================================\n"
 	
-	infile = gzip.open('planetpos.dat.gz','rt')
-
-
+	#infile = gzip.open('planetpos.dat.gz','rt')
+	infile = open('planetpos.dat','rt')
+	
 	textarea.value = cadena
 	
 	txt_area=pydom['#textarea']
 	txt_area.style["color"] = "orange"
 	
-	#btnrun = pydom['#run']
-	#textarea.value = btnrun._set_attribute("disabled","false")
-	#btnrun.__set_attr__("disabled", "false")
-	#btnrun.__set_attr_(self, "disabled","false")
-
 	cont=0
 	cont2=0
 	for line in infile:
 		reg=[int(x) for x in line.strip().split('\t')]
-		#reg=str(reg)
-		#linea+=reg+'&#13;&#10;'
-		#linea+=imprimir(reg)+"\r\n"
 		
 		if ang(reg[1],sun_i) <= sun_f and \
 		ang(reg[2],moon_i) <= moon_f and \
@@ -292,21 +251,13 @@ async def horosweb(event):
 			textarea.value = cadena + "\n\n" + simbolo
 			textarea.scrollTop = textarea.scrollHeight;
 			await asyncio.sleep(0)
-				#cadena="Too many matches."
-		#		break
 
-		
-		#output_div.innerText = imprimir(reg)
-		#output_div.value = cadena
+	
 	cadena+="\n\n\tEND OF CALCULATIONS."
 	textarea.value = cadena
 	textarea.scrollTop = textarea.scrollHeight;
 	txt_area.style["color"] = "white"
-	#newButton.setAttribute("disabled", False)
-	#runButton.setAttribute("disabled", 0)
-	#runButton.setAttribute("enabled", "true")
-	
-	#runButton.removeAttribute("disabled")
+
 	newButton.removeAttribute("disabled")
 	dwnldButton.removeAttribute("disabled")
 	
