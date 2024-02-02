@@ -1,0 +1,153 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+/*
+table {
+	margin: auto;
+	width: 35%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	/*border-collapse: separate;
+	border-spacing: 10px;
+        }
+*/
+
+
+.contenedor {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* 100% del viewport height */
+    overflow: hidden;
+}
+
+.parte-superior {
+    flex: 1; /* Ocupa 1/3 del espacio disponible */
+    background-color: midnightblue; /*#3498db; /* Color de fondo para la parte superior */
+    color: #ffffff; /* Color del texto */
+    text-align: center; /* Alineación del texto al centro */
+    
+    /*background-image: url('fondo.png'); /* Ruta de la imagen */
+    /*background-size: contain; /* Ajustar la imagen para cubrir todo el div */
+    /*background-position: center; /* Centrar la imagen */
+    /*color: white; /* Color del texto para que se vea bien sobre la imagen */
+    
+}
+
+.parte-inferior {
+    flex: 2; /* Ocupa 2/3 del espacio disponible */
+    background-color: lightslategrey; /*#ecf0f1; /* Color de fondo para la parte inferior */
+    color: #333333; /* Color del texto */
+    text-align: center; /* Alineación del texto al centro */
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+textarea.c {
+    white-space: pre-wrap;
+    width: 100%;
+    font-family: monospace;
+    /*max-height: 80%; /* Establece un máximo del 80% de la altura de la parte inferior */
+    margin: 0;
+    resize: none;
+    width:70ch;
+    /*flex-grow: 1; /* Permite crecer según sea necesario */
+    /*color:#6C5EB5;*/
+    color:white;
+    background-color: black; /*#352879 ; */
+    font-size:small;
+}
+
+/* ... otros estilos ... */
+/* Media Query para dispositivos con pantalla ancha (como ordenadores) */
+@media (min-width: 768px) {
+    textarea.c {
+        font-size: large; /* Tamaño de letra para ordenadores */
+    }
+    input{
+   font-family:monospace;
+   font-size:x-large;
+   width:4ch;
+   text-align:right;
+	}
+table {
+	margin: auto;
+	width: 35%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	/*border-collapse: separate;*/
+	border-spacing: 10px;
+        }
+}
+
+/* Media Query para dispositivos con pantalla estrecha (como teléfonos móviles) */
+@media (max-width: 767px) {
+    textarea.c {
+        font-size: small; /* Tamaño de letra para teléfonos móviles */
+    }
+    input{
+   font-family:monospace;
+   font-size:initial !important;
+   width:4ch;
+   text-align:right;
+}
+table {
+	margin: auto;
+	width: 90%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	/*border-collapse: separate;*/
+	border-spacing: 10px;
+        }
+}
+
+
+.botones {
+    padding: 10px;
+    text-align: center;
+    flex-grow: 0; /* No permitas que los botones crezcan, ocúpese del espacio restante */
+}
+
+.boton {
+    margin: 10px; /* Ajusta el margen de los botones según sea necesario */
+    /* Agrega más estilos a tus botones según sea necesario */
+}
+
+label {
+    text-align: left; /* Alineación a la izquierda */
+    /*display: block; /* Asegura que el label ocupe toda la línea */
+    margin-bottom: 5px; /* Espaciado opcional entre etiquetas y campos de entrada */
+    font-family:monospace;
+    size:7;
+}
+
+/*
+input{
+   font-family:monospace;
+   font-size:x-large;
+   width:4ch;
+   text-align:right;
+}
+*/
+
+/* Estilo para separar las secciones */
+.seccion {
+margin-bottom: 5px; /* Puedes ajustar este valor según tus preferencias */
+}
+
+/* Estilo para separar los inputs dentro de cada sección */
+.seccion input {
+/* margin-bottom: 5px; /* Puedes ajustar este valor según tus preferencias */
+}
+
+.seccion label {
+	display:inline;
+	/*font-size: normal;*/
+	width:15px; !important;
+	text-align: left;
+	/* border-style: double none none none;*/
+}
