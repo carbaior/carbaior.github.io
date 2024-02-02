@@ -219,9 +219,8 @@ async def horosweb(event):
 	cadena+='\t{:.1f}'.format(fin(6)/10)+"\n"
 	cadena+="================================================================\n"
 	
-	#infile = gzip.open('planetpos.dat.gz','rt')
-	infile = open('planetpos.dat','rt')
-	
+	infile = gzip.open('planetpos.dat.gz','rt')
+		
 	textarea.value = cadena
 	
 	txt_area=pydom['#textarea']
