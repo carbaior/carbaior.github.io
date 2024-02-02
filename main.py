@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import gzip, asyncio
+import bz2, asyncio
 from pyscript import document
 from pyweb import pydom
 
@@ -219,7 +219,7 @@ async def horosweb(event):
 	cadena+='\t{:.1f}'.format(fin(6)/10)+"\n"
 	cadena+="================================================================\n"
 	
-	infile = gzip.open('planetpos.dat.gz','rt')
+	infile = bz2.open('planetpos.dat.bz2','rt')
 		
 	textarea.value = cadena
 	
