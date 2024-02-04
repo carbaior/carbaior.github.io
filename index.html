@@ -46,44 +46,47 @@
 		<th></th>
 		<th>Sun</th>
 		<th>Moon</th>
-		<th>Mercury</th>
-		<th>Venus</th>
-		<th>Mars</th>
-		<th>Jupiter</th>
 		<th>Saturn</th>
+		<th>Jupiter</th>
+		<th>Mars</th>
+		<th>Venus</th>
+		<th>Mercury</th>
 	      </tr>
 	    </thead>
 	    <tbody>
 	      <tr>
 		<td class="row-label">From:</td>
-		<td><input type="text" id="isun"   value="6.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="imoon"   value="3.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="imerc"   value="11.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="ivenus"   value="1.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="imars"   value="11.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="ijup"   value="9.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="isun"   value="0.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="imoon"   value="6.0" oninput="validarInput(this)"></td>
 		<td><input type="text" id="isat"   value="10.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="ijup"   value="2.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="imars"   value="7.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="ivenus"   value="1.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="imerc"   value="11.0" oninput="validarInput(this)"></td>
 	      </tr>
 	      <tr>
 		<td class="row-label">To:</td>
-		<td><input type="text" id="fsun"   value="11.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="fmoon"   value="4.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="fmerc"   value="12.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="fvenus"   value="2.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="fmars"   value="12.0" oninput="validarInput(this)"></td>
-		<td><input type="text" id="fjup"   value="11.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fsun"   value="1.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fmoon"   value="7.0" oninput="validarInput(this)"></td>
 		<td><input type="text" id="fsat"   value="11.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fjup"   value="3.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fmars"   value="8.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fvenus"   value="3.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fmerc"   value="1.0" oninput="validarInput(this)"></td>
 	      </tr>
 	      <tr>
 		<td class="row-label">Best:</td>
-		<td><input type="text" id="bsun"   value="10.5" oninput="validarInput(this)"></td>
-		<td><input type="text" id="bmoon"   value="3.5" oninput="validarInput(this)"></td>
-		<td><input type="text" id="bmerc"   value="11.5" oninput="validarInput(this)"></td>
-		<td><input type="text" id="bvenus"   value="1.5" oninput="validarInput(this)"></td>
-		<td><input type="text" id="bmars"   value="11.5" oninput="validarInput(this)"></td>
-		<td><input type="text" id="bjup"   value="10.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bsun"   value="0.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bmoon"   value="6.5" oninput="validarInput(this)"></td>
 		<td><input type="text" id="bsat"   value="10.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bjup"   value="2.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bmars"   value="7.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bvenus"   value="2.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bmerc"   value="0.0" oninput="validarInput(this)"></td>
 	      </tr>
+	      <tr>
+		<td class="row-label">Name:</td>
+		<td colspan="7"><input type="text" id="nombre" style="margin-top: 10px;width:100%;text-align:left" value="Leiden Aratea"></td>
 	    </tbody>
 	  </table>
 	</div>
@@ -101,7 +104,7 @@
                 
                	<div class="botones">
                     <button id="new" style="font-size:x-large; margin-right: 50px;" py-click="limpiar" class="boton">New</button>
-                    <button id="download" style="font-size:x-large" class="boton" onclick="descargar()">Download</button>
+                    <button id="save" style="font-size:x-large" class="boton" onclick="descargar()">Save</button>
                 </div>
         </div>
     </div>
@@ -152,10 +155,11 @@
 	
 	function descargar() {
 		var contenido = document.getElementById("textarea").value;
+		var nombre = document.getElementById("nombre").value;
 		var blob = new Blob([contenido], { type: "text/plain" });
 		var a = document.createElement("a");
 		a.href = URL.createObjectURL(blob);
-		a.download = "salida_horos.txt";
+		a.download = nombre+".txt";
 		document.body.appendChild(a);
 		a.click();
 		document.body.removeChild(a);
@@ -169,7 +173,7 @@
 	infile = open('saludo','rt')
 	textarea = document.querySelector("#textarea")
 	textarea.value = infile.read()
-	dwnldButton=document.getElementById("download")
+	dwnldButton=document.getElementById("save")
 	dwnldButton.setAttribute("disabled","true")
 	infile.close()
 	</py-script>	
