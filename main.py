@@ -46,6 +46,23 @@ from pyweb import pydom
 ============================================================
 
 """
+#Z =  [310,560,920,1180,1370,1720,2150,2390,2660,2960,3260,3490,3900,4150]
+#zod: te da pos zodiaco de una posición en décimas de grados
+def zod(p):
+	if p<310:
+		i=11
+		p+=3600
+	else:
+		for i in range(len(Z)-1):
+			if p<Z[i+1]:
+				break
+	
+	q=p-Z[i]
+	d=(Z[i+1]-Z[i])/10
+	q=int(q/d)
+	return str(i)+'.'+str(q)
+		
+
 
 #ini: te da inicio del intervalo en *decimas de grados* (grados/10)
 def ini(i):
@@ -90,11 +107,40 @@ def ang(a,b):
 	if (res := a -b) > 1800:
 		res=3600-res
 	return res
+
+def ang_s(a,b):
+	s = 1
+	if (a < b):
+		a,b = b,a
+		s = -1
+	if (res := a -b) > 1800:
+		res=3600-res
+	return res*s
 	
 def imprimir(reg):
+	"""
+	dst = []
+	for i in range(0,dst):
+		dst.append(int(ang(reg[i+1],mejor[i])))
+	
+	"""
+	
+	a=ang(reg[1],mejor(0))
+	b=ang(reg[2],mejor(1))
+	c=ang(reg[3],mejor(2))
+	d=ang(reg[4],mejor(3))
+	e=ang(reg[5],mejor(4))
+	f=ang(reg[6],mejor(5))
+	g=ang(reg[7],mejor(6))
+	avgdst=(a+b+c+d+e+f+g)/7
+	
 	cadena=""
+	cadena+="\n----------------------------------------"
 	cadena+="\nPLANETS FIT THE HOROSCOPE AT JD:"+str(reg[0])+"\n"
-	cadena+='YEAR/MONTH/DAY='+str(reg[8])+'/ '+str(reg[9])+'/ '+str(reg[10])+"\n"+"\n"
+	gc=""
+	if int(reg[0])>2299160:
+		gc=" (GC)"
+	cadena+='YEAR/MONTH/DAY='+str(reg[8])+'/ '+str(reg[9])+'/ '+str(reg[10])+gc+"\n"+"\n"
 	cadena+="\tPositions: J2000/ planet-Sun J2000/ CS:\n\n"
 	cadena+="\tSUN\tMOON\tSATURN\tJUPITER\tMARS\tVENUS\tMERCURY\n"
 	cadena+='\t{:.1f}'.format(reg[1]/10)
@@ -103,16 +149,20 @@ def imprimir(reg):
 	cadena+='\t{:.1f}'.format(reg[4]/10)
 	cadena+='\t{:.1f}'.format(reg[5]/10)
 	cadena+='\t{:.1f}'.format(reg[6]/10)
-	cadena+='\t{:.1f}'.format(reg[7]/10)
-	cadena+='\t{:.1f}'.format(0.0)+"\n"
-	cadena+='\t{:.1f}'.format(ang(reg[2],reg[1])/10)
-	cadena+='\t{:.1f}'.format(ang(reg[3],reg[1])/10)
-	cadena+='\t{:.1f}'.format(ang(reg[4],reg[1])/10)
-	cadena+='\t{:.1f}'.format(ang(reg[5],reg[1])/10)
-	cadena+='\t{:.1f}'.format(ang(reg[6],reg[1])/10)
-	cadena+='\t{:.1f}'.format(ang(reg[7],reg[1])/10)
-	cadena+='\n\n'
-	
+	cadena+='\t{:.1f}'.format(reg[7]/10)+'\n'
+	cadena+='\t{:.1f}'.format(0.0)
+	cadena+='\t{:.1f}'.format(ang_s(reg[2],reg[1])/10)
+	cadena+='\t{:.1f}'.format(ang_s(reg[3],reg[1])/10)
+	cadena+='\t{:.1f}'.format(ang_s(reg[4],reg[1])/10)
+	cadena+='\t{:.1f}'.format(ang_s(reg[5],reg[1])/10)
+	cadena+='\t{:.1f}'.format(ang_s(reg[6],reg[1])/10)
+	cadena+='\t{:.1f}'.format(ang_s(reg[7],reg[1])/10)+'\n'
+	for i in range (1,8):
+		cadena+='\t'+zod(reg[i])
+	cadena+='\n\nAVERAGE DISTANCE FROM BEST POINTS:'
+	cadena+='\t{:.1f}'.format(avgdst/10) + ' deg'
+	cadena+='\n                 YEAR/MONTH/DAY=\t'+str(reg[8])+'/ '+str(reg[9])+'/ '+str(reg[10])+gc
+	cadena+="\n----------------------------------------"
 	return cadena
 
 
@@ -123,7 +173,7 @@ def limpiar(event):
 	textarea.value = infile.read()
 	runButton=document.getElementById("run")
 	runButton.removeAttribute("disabled")
-	dwnldButton=document.getElementById("download")
+	dwnldButton=document.getElementById("save")
 	dwnldButton.setAttribute("disabled","true")
 	infile.close()
 
@@ -135,9 +185,8 @@ async def horosweb(event):
 
 	newButton=document.getElementById("new")
 	newButton.setAttribute("disabled","true")
-	dwnldButton=document.getElementById("download")
+	dwnldButton=document.getElementById("save")
 	dwnldButton.setAttribute("disabled","true")
-	#result= await js.searching().to_py()
 	textarea = document.querySelector("#textarea")
 	#desde:
 	global h1 
@@ -158,16 +207,7 @@ async def horosweb(event):
 	m=[]
 	
 	j=0
-	for i in ["sun","moon","merc","venus","mars","jup","sat"]:
-		"""
-		textarea.
-		pos=document.getElementById("i"+i)
-		h1.append(pos.value)
-		pos=document.getElementById("j"+i)	
-		h2.append(pos.value)
-		pos=document.getElementById("b"+i)
-		m.append(pos.value)
-		"""
+	for i in ["sun","moon","sat","jup","mars","venus","merc"]:
 		pos=document.querySelector("#i"+i)
 		h1.append(float(pos.value))
 		pos=document.querySelector("#f"+i)	
@@ -231,6 +271,8 @@ async def horosweb(event):
 	for line in infile:
 		reg=[int(x) for x in line.strip().split('\t')]
 		
+		r=[]
+		
 		if ang(reg[1],sun_i) <= sun_f and \
 		ang(reg[2],moon_i) <= moon_f and \
 		ang(reg[3],saturn_i) <= saturn_f and \
@@ -247,7 +289,7 @@ async def horosweb(event):
 			cont2+=1
 			if cont2==4:
 				cont2=0			
-			textarea.value = cadena + "\n\n" + simbolo
+			textarea.value = cadena + "\n\n" + simbolo + "Searching " + str(int(reg[8]/100)*100) + "'s"
 			textarea.scrollTop = textarea.scrollHeight;
 			await asyncio.sleep(0)
 
