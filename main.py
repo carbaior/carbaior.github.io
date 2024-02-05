@@ -175,6 +175,16 @@ def limpiar(event):
 	runButton.removeAttribute("disabled")
 	dwnldButton=document.getElementById("save")
 	dwnldButton.setAttribute("disabled","true")
+	j=0
+	for i in ["sun","moon","sat","jup","mars","venus","merc"]:
+		pos=document.querySelector("#i"+i)
+		pos.value="0.0"
+		pos=document.querySelector("#f"+i)	
+		pos.value="0.0"
+		pos=document.querySelector("#b"+i)
+		pos.value="0.0"
+	nombre=document.querySelector("#nombre")
+	nombre.value=""
 	infile.close()
 
 
