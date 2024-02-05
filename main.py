@@ -240,8 +240,42 @@ async def horosweb(event):
 	mercury_i = suma(resta(ini(6),D),mercury_f)
 
 	cadena=""
+	cadena+=" ======= CONSTELLATION    SCALE  ===================\n"
+	cadena+="       12=0-ARIES-1-TAURUS-2-GEMINI-3\n"
+	cadena+="       3-CANCER-4-LEO-5-VIRGO-6\n"
+	cadena+="       6-LIBRA-7-SCORPIO-8-SAGITTARIUS-9\n"
+	cadena+="       9-CAPRICORN-10-AQUARIUS-11-PISCES-12=0\n\n"
+	cadena+=" --- HOROSCOPE ACCORDING TO CONSTELLATIONS SCALE: --\n"
+	cadena+="\tSUN\tMOON\tSATURN\tJUPITER\tMARS\tVENUS\tMERCURY\n"
+	cadena+='from:\t{:.1f}'.format(h1[0])
+	cadena+='\t{:.1f}'.format(h1[1])
+	cadena+='\t{:.1f}'.format(h1[2])
+	cadena+='\t{:.1f}'.format(h1[3])
+	cadena+='\t{:.1f}'.format(h1[4])
+	cadena+='\t{:.1f}'.format(h1[5])
+	cadena+='\t{:.1f}'.format(h1[6])+"\n"
+	cadena+='to:\t{:.1f}'.format(h2[0])
+	cadena+='\t{:.1f}'.format(h2[1])
+	cadena+='\t{:.1f}'.format(h2[2])
+	cadena+='\t{:.1f}'.format(h2[3])
+	cadena+='\t{:.1f}'.format(h2[4])
+	cadena+='\t{:.1f}'.format(h2[5])
+	cadena+='\t{:.1f}'.format(h2[6])+"\n"
+	cadena+='point:\t{:.1f}'.format(m[0])
+	cadena+='\t{:.1f}'.format(m[1])
+	cadena+='\t{:.1f}'.format(m[2])
+	cadena+='\t{:.1f}'.format(m[3])
+	cadena+='\t{:.1f}'.format(m[4])
+	cadena+='\t{:.1f}'.format(m[5])
+	cadena+='\t{:.1f}'.format(m[6])+"\n"
+	cadena+="===================================================\n\n"
+	cadena+=" == CSN ON ECLIPTIC J2000 (modified 17.11.2007):==\n\n"
+	cadena+=' <31deg> ARIES <56deg> TAURUS <92deg> GEMINI\n'
+	cadena+=' <118deg> CANCER <137deg> LEO <172deg> VIRGO\n'
+	cadena+=' <215deg> LIBRA <239deg> SCORPIO\n'
+	cadena+=' <266deg> SAGITTARIUS <296deg> CAPRICORN\n'
+	cadena+=' <326deg> AQUARIUS <349deg> PISCES\n\n'
 	cadena+="---- HOROSCOPE ON ECLIPTIC J2000 (IN DEGREES): -----\n"
-		
 	cadena+="\tSUN\tMOON\tSATURN\tJUPITER\tMARS\tVENUS\tMERCURY\n"
 	cadena+='from:\t{:.1f}'.format(ini(0)/10)
 	cadena+='\t{:.1f}'.format(ini(1)/10)
@@ -257,7 +291,10 @@ async def horosweb(event):
 	cadena+='\t{:.1f}'.format(fin(4)/10)
 	cadena+='\t{:.1f}'.format(fin(5)/10)
 	cadena+='\t{:.1f}'.format(fin(6)/10)+"\n"
-	cadena+="================================================================\n"
+	cadena+="================================================================\n\n\n"
+	cadena+="            RESULTS OF CALCULATIONS\n"
+	cadena+="         From year -500 to year +1950\n"
+	cadena+="         (with dopusk =  "+str(D/10)+" degrees)\n"
 	
 	infile = bz2.open('planetpos.dat.bz2','rt')
 		
