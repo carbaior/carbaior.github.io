@@ -1,18 +1,14 @@
-HorosWeb preview v0.240202 (alfa)
+Benjamin preview v0.240211
 
-HorosWeb mimics Horos (https://chronologia.org/horos.html) 
+Benjamin mimics Horos (https://chronologia.org/horos.html) 
 
- -HorosWeb doesn't include Horos code.
- 
- -Adapted to computer or phone screens.
- 
- -Output like that of original Horos. 
- 
- -Some features are not yet implemented.
- 
- -Coded with Pyscript*
- 
-  -Astronomical positions computed with Skyfield**
+-Benjamin doesn't include Horos code.
+-Adapted to computer or phone screens.
+-Output like that of original Horos. 
+-Some features are not yet implemented.
+-Coded with Pyscript*
+-Astronomical positions computed with Skyfield**
+-"Emendatione Temporum": Scaligerian Chronology.
 
 ```
 ==============================================================
@@ -28,11 +24,11 @@ HorosWeb mimics Horos (https://chronologia.org/horos.html)
  <266deg> SAGITTARIUS <296deg> CAPRICORN
  <326deg> AQUARIUS    <349deg> PISCES
 ```
-HorosWeb is gplv3.
 
 2024 Carlos Baiget Orts
 asinfreedom@gmail.com
 cliolapso.blogspot.com
 
+Benjamin is gplv3.
 * https://pyscript.net/
 ** https://rhodesmill.org/skyfield/
