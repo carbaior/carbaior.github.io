@@ -1,13 +1,14 @@
-HorosWeb preview v0.240206
+Benjamin preview v0.240211
 
-HorosWeb mimics Horos (https://chronologia.org/horos.html) 
+Benjamin mimics Horos (https://chronologia.org/horos.html) 
 
--HorosWeb doesn't include Horos code.
+-Benjamin doesn't include Horos code.
 -Adapted to computer or phone screens.
 -Output like that of original Horos. 
 -Some features are not yet implemented.
 -Coded with Pyscript*
 -Astronomical positions computed with Skyfield**
+-"Emendatione Temporum": Scaligerian Chronology.
 
 ==============================================================
 0 ARIES	1 TAURO 2 GEMINIS 3 CANCER 4 LEO 5 VIRGO 6 LIBRA 7 
@@ -24,6 +25,6 @@ HorosWeb mimics Horos (https://chronologia.org/horos.html)
 asinfreedom@gmail.com
 cliolapso.blogspot.com
 
-HorosWeb is gplv3.
+Benjamin is gplv3.
 * https://pyscript.net/
 ** https://rhodesmill.org/skyfield/
