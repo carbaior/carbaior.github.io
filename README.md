@@ -8,7 +8,6 @@ Benjamin mimics Horos (https://chronologia.org/horos.html)
 -Some features are not yet implemented.
 -Coded with Pyscript*
 -Astronomical positions computed with Skyfield**
--"Emendatione Temporum": Scaligerian Chronology.
 
 ```
 ==============================================================
