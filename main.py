@@ -175,7 +175,7 @@ def limpiar(event):
 	runButton.removeAttribute("disabled")
 	dwnldButton=document.getElementById("save")
 	dwnldButton.setAttribute("disabled","true")
-	j=0
+	"""
 	for i in ["sun","moon","sat","jup","mars","venus","merc"]:
 		pos=document.querySelector("#i"+i)
 		pos.value="0.0"
@@ -185,6 +185,7 @@ def limpiar(event):
 		pos.value="0.0"
 	nombre=document.querySelector("#nombre")
 	nombre.value=""
+	"""
 	infile.close()
 
 
@@ -229,10 +230,18 @@ async def horosweb(event):
 	global Z
 	Z =  [310,560,920,1180,1370,1720,2150,2390,2660,2960,3260,3490,3900,4150]
 
+	#EMENDATIONE TEMPORUM:
+	emtemp=document.getElementById("emtemp")
+		
+	if emtemp.checked==True:
+		for i in range(0,len(Z)):
+			Z[i]=Z[i]-100
+
 	#dopusk:
 	global D
 	D = 50
 	
+	#esto se puede simplificar, pero no tengo tiempo:
 	sun_f = suma(resta(fin(0),resta(ini(0),D)),D)/2
 	moon_f = suma(resta(fin(1),resta(ini(1),D)),D)/2
 	saturn_f = suma(resta(fin(2),resta(ini(2),D)),D)/2
@@ -337,13 +346,13 @@ async def horosweb(event):
 			if cont2==4:
 				cont2=0			
 			textarea.value = cadena + "\n\n" + simbolo + "Searching " + str(int(reg[8]/100)*100) + "'s"
-			textarea.scrollTop = textarea.scrollHeight;
+			textarea.scrollTop = textarea.scrollHeight
 			await asyncio.sleep(0)
 
 	
 	cadena+="\n\n\tEND OF CALCULATIONS."
 	textarea.value = cadena
-	textarea.scrollTop = textarea.scrollHeight;
+	textarea.scrollTop = textarea.scrollHeight
 	txt_area.style["color"] = "white"
 
 	newButton.removeAttribute("disabled")
