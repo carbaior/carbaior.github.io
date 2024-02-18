@@ -313,7 +313,7 @@ async def horosweb(event):
 	cadena+="================================================================\n\n\n"
 	cadena+="            RESULTS OF CALCULATIONS\n"
 	cadena+="         From year -500 to year +1950\n"
-	cadena+="         (with dopusk =  "+str(D/10)+" degrees)\n"
+	cadena+="         (with tolerance =  "+str(D/10)+" degrees)\n"
 	
 	infile = bz2.open('planetpos.dat.bz2','rt')
 		
