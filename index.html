@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Benjamin</title>
+	<link rel="stylesheet" href="estilos.css?v=1">
+	<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.3/core.css">
+	<script type="module" src="https://pyscript.net/releases/2024.1.3/core.js"></script>
+	<!-- for splashscreen -->
+	<style>
+		#loading {
+		    outline: none;
+		    border: none;
+		    background: transparent;
+		    color: orange; /* Color de texto inicial */
+		    animation: autoColorChange 0.2s infinite alternate; /* Cambia el color de texto cada 2 segundos */
+		    animation-timing-function: linear;
+		}
+		
+		@keyframes autoColorChange {
+		    to {
+		        color: green; /* Cambia el color de texto al segundo color */
+		    }
+        }
+	</style>
+	<script type="module">
+		const loading = document.getElementById('loading');
+		addEventListener('py:ready', () => loading.close());
+		loading.showModal();
+	</script>
+</head>
+<body>
+    <dialog id="loading">
+        <h1>Loading...</h1>
+    </dialog>
+    <div class="contenedor">
+        <div class="parte-superior">
+            <h1>Benjamin</h1>
+            <p>
+            <p>
+        <div>
+	<table>
+	    <thead>
+	      <tr>
+		<th></th>
+		<th>Sun</th>
+		<th>Moon</th>
+		<th>Saturn</th>
+		<th>Jupiter</th>
+		<th>Mars</th>
+		<th>Venus</th>
+		<th>Mercury</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+		<td class="row-label">From:</td>
+		<td><input type="text" id="isun"   value="0.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="imoon"   value="6.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="isat"   value="10.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="ijup"   value="2.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="imars"   value="7.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="ivenus"   value="1.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="imerc"   value="11.0" oninput="validarInput(this)"></td>
+	      </tr>
+	      <tr>
+		<td class="row-label">To:</td>
+		<td><input type="text" id="fsun"   value="1.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fmoon"   value="7.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fsat"   value="11.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fjup"   value="3.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fmars"   value="8.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fvenus"   value="3.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="fmerc"   value="1.0" oninput="validarInput(this)"></td>
+	      </tr>
+	      <tr>
+		<td class="row-label">Best:</td>
+		<td><input type="text" id="bsun"   value="0.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bmoon"   value="6.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bsat"   value="10.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bjup"   value="2.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bmars"   value="7.5" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bvenus"   value="2.0" oninput="validarInput(this)"></td>
+		<td><input type="text" id="bmerc"   value="0.0" oninput="validarInput(this)"></td>
+	      </tr>
+	      
+
+
+	      
+
+		<tr>
+		<td class="row-label">Name:</td>
+		<td colspan="7"><input type="text" id="nombre" style="margin-top: 10px;width:100%;text-align:left" value="Leiden Aratea"></td>
+		</tr>
+
+		<tr>
+		<td colspan="8" style="height: 20px;"></td> 
+		</tr>
+
+		<tr>
+		<td  class="row-label" colspan="8" style="text-align: center;">Gregorian Reform: <input type="checkbox" id="emtemp" ></td>
+		</tr>
+
+		
+	    </tbody>
+	  </table>
+	</div>
+		<p>
+		<button id="run" py-click="horosweb" style="font-size:x-large">Run</button>
+
+
+        </div>
+        <div class="parte-inferior">
+
+        	<p>
+                <div id="output">
+                    <textarea readonly class="c" rows="25%" id="textarea"></textarea>
+                </div>
+                
+               	<div class="botones">
+                    <button id="new" style="font-size:x-large; margin-right: 50px;" py-click="limpiar" class="boton">New</button>
+                    <button id="save" style="font-size:x-large" class="boton" onclick="descargar()">Save</button>
+                </div>
+        </div>
+    </div>
+	<script>
+
+	function validarInput(input) {
+		// Obtener el valor actual del input
+		let valor = input.value;
+
+		// Eliminar caracteres no permitidos (no números ni punto decimal)
+		valor = valor.replace(/[^0-9.]/g, '');
+
+		// Contar la cantidad de puntos decimales
+		const countPuntos = valor.split('.').length - 1;
+
+		// Validar la posición del punto decimal
+		const puntoDecimalPos = valor.indexOf('.');
+		if (puntoDecimalPos !== -1 && countPuntos > 1) {
+		// Permitir solo un dígito decimal
+		valor = valor.slice(0, puntoDecimalPos + 1);
+		}
+
+		// Limitar la longitud de la parte entera a dos dígitos
+		const partes = valor.split('.');
+
+		// Limitar la parte entera a un máximo de dos dígitos
+		partes[0] = partes[0].slice(0, 2);
+
+		// Limitar la parte entera a un valor máximo de 12
+		if (parseInt(partes[0]) == 12 && parseInt(partes[1]) > 0) {
+		partes[0] = '12';
+		partes[1] = '0'; // Establecer la parte decimal a 0 si la parte entera es 12
+		}
+
+		if (parseInt(partes[0]) > 12) {
+		partes[0] = '12';
+		partes[1] = '0'; // Establecer la parte decimal a 0 si la parte entera es 12
+		}
+
+		// No permitir más de un dígito decimal
+		if (partes[1] && partes[1].length > 1) {
+		partes[1] = partes[1].charAt(0); // Tomar solo el primer dígito decimal
+		}
+
+		// Aplicar el valor validado al input
+		input.value = partes.join('.');
+	}
+	
+	function descargar() {
+		var contenido = document.getElementById("textarea").value;
+		var nombre = document.getElementById("nombre").value;
+		if (nombre == ""){
+			nombre="horosweb"
+		}
+		var blob = new Blob([contenido], { type: "text/plain" });
+		var a = document.createElement("a");
+		a.href = URL.createObjectURL(blob);
+		a.download = nombre+".txt";
+		document.body.appendChild(a);
+		a.click();
+		document.body.removeChild(a);
+	}
+	</script>
+
+
+	
+    <script type="py" src="main.py?v=1" config="pyscript.json?v=1"></script>
+	<py-script>
+	infile = open('saludo','rt')
+	textarea = document.querySelector("#textarea")
+	textarea.value = infile.read()
+	dwnldButton=document.getElementById("save")
+	dwnldButton.setAttribute("disabled","true")
+	infile.close()
+	</py-script>	
+</body>
+</html>
+
