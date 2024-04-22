@@ -2,6 +2,8 @@ Benjamin preview v0.240419
 
 Benjamin is an horoscope dating tool
 
++ Output mimics that of 'HOROS'.
++ Benjamin doesn't include 'HOROS' code.
 + Adapted to computer or phone screens.
 + Some features are not yet implemented.
 + Search limited to range -500 to 1950 (a MUCH greater search range is almost ready)
