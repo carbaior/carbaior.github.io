@@ -26,7 +26,7 @@ Benjamin is an horoscope dating tool
  <326deg> AQUARIUS    <349deg> PISCES
 ```
 
-2024 Carlos Baiget Orts
+2024 Carlos Baiget Orts | asinfreedom@gmail.com
 https://github.com/carbaior
 
 Benjamin is gplv3.
