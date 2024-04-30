@@ -1,14 +1,15 @@
-Benjamin preview v0.240419
+Benjamin preview v0.240501
 
 Benjamin is an horoscope dating tool
 
-+ Output mimics that of 'HOROS'.
-+ Benjamin doesn't include 'HOROS' code.
-+ Adapted to computer or phone screens.
-+ Some features are not yet implemented.
-+ Search limited to range -500 to 1950 (a MUCH greater search range is almost ready)
-+ Coded with Pyscript*
-+ Astronomical positions computed with Skyfield**
+-Search range: from -10000 to 1950
+-Output mimics that of 'HOROS'.
+-Benjamin doesn't include 'HOROS' code.
+-Adapted to computer or phone screens.
+-Some features are not yet implemented.
+-Coded with Pyscript*
+-Astronomical positions computed with Skyfield**
+
 
 ```
 ==============================================================
@@ -26,7 +27,7 @@ Benjamin is an horoscope dating tool
 ```
 
 2024 Carlos Baiget Orts
-asinfreedom@gmail.com
+https://github.com/carbaior
 
 Benjamin is gplv3.
 * https://pyscript.net/
