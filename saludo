@@ -10,7 +10,6 @@ Benjamin is an horoscope dating tool
 -Coded with Pyscript*
 -Astronomical positions computed with Skyfield**
 
-
 ==============================================================
 0 ARIES	1 TAURO 2 GEMINIS 3 CANCER 4 LEO 5 VIRGO 6 LIBRA 7 
 7 ESCORPIO 8 SAGITARIO 9 CAPRICORNIO 10 ACUARIO 11 PISCIS 12=0
@@ -23,6 +22,7 @@ Benjamin is an horoscope dating tool
  <326deg> AQUARIUS <349deg> PISCES
 
 2024 Carlos Baiget Orts
+https://github.com/carbaior
 
 Benjamin is gplv3.
 * https://pyscript.net/
