@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import bz2, asyncio
+import asyncio, bz2
 from pyscript import document
 from pyweb import pydom
 
@@ -315,7 +315,8 @@ async def horosweb(event):
 	cadena+="         From year -500 to year +1950\n"
 	cadena+="         (with tolerance =  "+str(D/10)+" degrees)\n"
 	
-	infile = bz2.open('planetpos.dat.bz2','rt')
+	infile = bz2.open('plpos.bz2','rt')
+	#infile = gzip.open('planetpos.dat.gz','rt')
 		
 	textarea.value = cadena
 	
@@ -324,10 +325,15 @@ async def horosweb(event):
 	
 	cont=0
 	cont2=0
+	
+	rega=[-1931441,113,3031,2782,1612,3494,3260,3467,-10000,1,2]
+	
 	for line in infile:
 		reg=[int(x) for x in line.strip().split('\t')]
 		
-		r=[]
+		for j in range(len(reg)):
+			reg[j]+=rega[j]
+		
 		
 		if ang(reg[1],sun_i) <= sun_f and \
 		ang(reg[2],moon_i) <= moon_f and \
@@ -337,6 +343,7 @@ async def horosweb(event):
 		ang(reg[6],venus_i) <= venus_f and \
 		ang(reg[7],mercury_i) <= mercury_f:
 			cadena+=imprimir(reg)
+				
 		cont+=1
 		if cont==20000:
 			cont=0
@@ -349,6 +356,8 @@ async def horosweb(event):
 			textarea.scrollTop = textarea.scrollHeight
 			await asyncio.sleep(0)
 
+		rega=reg
+	
 	
 	cadena+="\n\n\tEND OF CALCULATIONS."
 	textarea.value = cadena
