@@ -1,4 +1,4 @@
-Benjamin preview v0.240501
+Benjamin v0.240501
 
 Benjamin is an horoscope dating tool
 
