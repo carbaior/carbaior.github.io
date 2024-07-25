@@ -84,11 +84,7 @@
 		<td><input type="text" id="bvenus"   value="2.0" oninput="validarInput(this)"></td>
 		<td><input type="text" id="bmerc"   value="0.0" oninput="validarInput(this)"></td>
 	      </tr>
-	      
-
-
-	      
-
+  
 		<tr>
 		<td class="row-label">Name:</td>
 		<td colspan="7"><input type="text" id="nombre" style="margin-top: 10px;width:100%;text-align:left" value="Leiden Aratea"></td>
@@ -99,10 +95,17 @@
 		</tr>
 
 		<tr>
-		<td  class="row-label" colspan="8" style="text-align: center;">Gregorian Reform: <input type="checkbox" id="emtemp" ></td>
+		<td  class="row-label" colspan="8" style="text-align: center;" title="Find solutions for a misplaced equinox">Gregorian Reform: <input type="checkbox" id="emtemp" ></td>
 		</tr>
 
-		
+		<tr>
+		<td  class="row-label" colspan="8" style="text-align: center;" title="Use an uniform zodiac instead NC boundaries">Uniform Zodiac: <input type="checkbox" id="unizod" ></td>
+		</tr>
+
+		<tr>
+		<td  class="row-label" colspan="8" style="text-align: center;" title="Acceptable range out of limits ('dopusk' in HOROS)">Tolerance (º): <input type="number" id="dopusk" name="dopusk" min="5" max="30" value="5"></td>
+		</tr>
+	    
 	    </tbody>
 	  </table>
 	</div>
@@ -198,4 +201,3 @@
 	</py-script>	
 </body>
 </html>
-
