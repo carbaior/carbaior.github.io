@@ -4,49 +4,6 @@ import asyncio, bz2
 from pyscript import document
 from pyweb import pydom
 
-
-"""
-  
- == CSN ON ECLIPTIC J2000 (modified 17.11.2007):==
-   
- <31deg> ARIES <56deg> TAURUS <92deg> GEMINI
- <118deg> CANCER <137deg> LEO <172deg> VIRGO
- <215deg> LIBRA <239deg> SCORPIO
- <266deg> SAGITTARIUS <296deg> CAPRICORN
- <326deg> AQUARIUS <349deg> PISCES
-  
-  
-  sol sagitario
-  luna scorpio
-  saturno leo
-  jupiter scorpio
-  marte scorpio
-  venus sagitario
-  mercurio capricornio
- 
- 	SOL	LUNA	SATURNO JUPITER	MARTE	VENUS	MERCURIO
-# DESDE: --------------------------------------------------------
-	7.5	6.5	3.5	6.5	6.5	7.5	8.5
-# HASTA: --------------------------------------------------------
-	9.0	8.0	5.0	8.0	8.0	9.0	10.0
-# MEJOR: --------------------------------------------------------
-        8.5	7.5	4.5	7.5	7.5	8.5	9.5
-
-
-	SOL	LUNA	SATURNO JUPITER	MARTE	VENUS	MERCURIO
-# DESDE: --------------------------------------------------------
-	8.0	7.0	4.0	7.0	7.0	8.0	9.0
-# HASTA: --------------------------------------------------------
-	9.0	8.0	5.0	8.0	8.0	9.0	10.0
-# MEJOR: --------------------------------------------------------
-        8.5	7.5	4.5	7.5	7.5	8.5	9.5
-        
-============================================================
-0 ARIES	1 TAURO 2 GEMINIS 3 CANCER 4 LEO 5 VIRGO 6 LIBRA 7 ESCORPIO 8 SAGITARIO 9 CAPRICORNIO 10 ACUARIO 11 PISCIS 12=0
-============================================================
-
-"""
-#Z =  [310,560,920,1180,1370,1720,2150,2390,2660,2960,3260,3490,3900,4150]
 #zod: te da pos zodiaco de una posición en décimas de grados
 def zod(p):
 	if p<310:
@@ -188,7 +145,6 @@ def limpiar(event):
 	"""
 	infile.close()
 
-
 async def horosweb(event):
 	runButton=document.getElementById("run")
 	runButton.setAttribute("value","Press 'New'")
@@ -228,7 +184,14 @@ async def horosweb(event):
 
 	#zodiaco J2000:
 	global Z
-	Z =  [310,560,920,1180,1370,1720,2150,2390,2660,2960,3260,3490,3900,4150]
+	
+	#UNIFORM ZODIAC:
+	unizod=document.getElementById("unizod")
+	if unizod.checked==True:
+		Z =  [310,610,910,1210,1510,1810,2110,2410,2710,3010,3310,3610,3910,4210]
+	else:
+		Z =  [310,560,920,1180,1370,1720,2150,2390,2660,2960,3260,3490,3900,4150] #NC ZODIAC
+
 
 	#EMENDATIONE TEMPORUM:
 	emtemp=document.getElementById("emtemp")
@@ -236,10 +199,15 @@ async def horosweb(event):
 	if emtemp.checked==True:
 		for i in range(0,len(Z)):
 			Z[i]=Z[i]-100
+	
 
 	#dopusk:
 	global D
-	D = 50
+	dopusk=document.getElementById("dopusk")
+	D=10*int(dopusk.value)
+	#D = 50
+	
+	
 	
 	#esto se puede simplificar, pero no tengo tiempo:
 	sun_f = suma(resta(fin(0),resta(ini(0),D)),D)/2
@@ -249,6 +217,8 @@ async def horosweb(event):
 	mars_f = suma(resta(fin(4),resta(ini(4),D)),D)/2
 	venus_f = suma(resta(fin(5),resta(ini(5),D)),D)/2
 	mercury_f = suma(resta(fin(6),resta(ini(6),D)),D)/2
+	
+
 
 	sun_i = suma(resta(ini(0),D),sun_f)
 	moon_i = suma(resta(ini(1),D),moon_f)
@@ -288,12 +258,16 @@ async def horosweb(event):
 	cadena+='\t{:.1f}'.format(m[5])
 	cadena+='\t{:.1f}'.format(m[6])+"\n"
 	cadena+="===================================================\n\n"
-	cadena+=" == CSN ON ECLIPTIC J2000 (modified 17.11.2007):==\n\n"
-	cadena+=' <31deg> ARIES <56deg> TAURUS <92deg> GEMINI\n'
-	cadena+=' <118deg> CANCER <137deg> LEO <172deg> VIRGO\n'
-	cadena+=' <215deg> LIBRA <239deg> SCORPIO\n'
-	cadena+=' <266deg> SAGITTARIUS <296deg> CAPRICORN\n'
-	cadena+=' <326deg> AQUARIUS <349deg> PISCES\n\n'
+	#cadena+=" == CSN ON ECLIPTIC J2000 (modified 17.11.2007):==\n\n"
+	piscis=int(Z[11]/10)
+	if piscis>360:
+		piscis-=360
+	cadena+=" == CSN ON ECLIPTIC J2000 :==\n\n"
+	cadena+=f' <{int(Z[0]/10)}> ARIES <{int(Z[1]/10)}> TAURUS<{int(Z[2]/10)}> GEMINI\n'
+	cadena+=f' <{int(Z[3]/10)}> CANCER <{int(Z[4]/10)}> LEO <{int(Z[5]/10)}> VIRGO\n'
+	cadena+=f' <{int(Z[6]/10)}> LIBRA <{int(Z[6]/10)}> SCORPIO\n'
+	cadena+=f' <{int(Z[8]/10)}> SAGITTARIUS <{int(Z[9]/10)}> CAPRICORN\n'
+	cadena+=f' <{int(Z[10]/10)}> AQUARIUS <{piscis}> PISCES\n\n'
 	cadena+="---- HOROSCOPE ON ECLIPTIC J2000 (IN DEGREES): -----\n"
 	cadena+="\tSUN\tMOON\tSATURN\tJUPITER\tMARS\tVENUS\tMERCURY\n"
 	cadena+='from:\t{:.1f}'.format(ini(0)/10)
