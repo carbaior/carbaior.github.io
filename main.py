@@ -204,7 +204,7 @@ async def horosweb(event):
 	#dopusk:
 	global D
 	dopusk=document.getElementById("dopusk")
-	D=10*int(dopusk.value)
+	D=10*float(dopusk.value)
 	#D = 50
 	
 	
